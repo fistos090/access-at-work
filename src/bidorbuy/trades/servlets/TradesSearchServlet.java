@@ -122,17 +122,17 @@ public class TradesSearchServlet extends HttpServlet {
 							tradeProduct.setHomeCategoryId(tradeJsonObj.getJsonNumber("homeCategoryId").longValue());
 							tradeProduct.setHotSelling(tradeJsonObj.getBoolean("hotSelling"));
 
-							DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH);
+							DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
 
-//							try {
-//								
-//								tradeProduct.setOpenTime(dFormat.parse(tradeJsonObj.getString("openTime")));
-//								tradeProduct.setCloseTime(dFormat.parse(tradeJsonObj.getString("closeTime")));
-//								
-//							} catch (ParseException e) {
-//								// TODO Auto-generated catch block
-//								e.printStackTrace();
-//							}
+							try {
+								
+								tradeProduct.setOpenTime(dFormat.parse(tradeJsonObj.getString("openTime")));
+								tradeProduct.setCloseTime(dFormat.parse(tradeJsonObj.getString("closeTime")));
+								
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 
 							JsonArray tradeJsonObjImages = tradeJsonObj.getJsonArray("images");
 							TradeProductImage[] images = new TradeProductImage[tradeJsonObjImages.size()];
