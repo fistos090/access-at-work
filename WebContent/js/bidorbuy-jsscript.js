@@ -1,0 +1,6 @@
+
+
+function checkValidityAndShowSpinner() {
+
+    return true;
+}
