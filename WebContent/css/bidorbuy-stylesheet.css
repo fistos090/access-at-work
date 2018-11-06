@@ -6,7 +6,7 @@
 
 .sidebar{
     margin: auto;
-    margin-top: 16%;
+    margin-top: 8%;
     width: 45%;
     padding: 10px;
     border: solid 0.2px #8888;
@@ -129,4 +129,14 @@ form{
 
 .results-pager li a:hover{
     text-decoration: none;
+}
+
+.data-loader {
+    display: none; 
+    margin: 10px 46%;
+}
+
+.data-loader i{
+    margin: 0px 11px;
+    font-size: 53px;
 }
