@@ -23,7 +23,7 @@
             <div class="sidebar">
                 <h5>Search bidorbuy trades</h5>
                 <hr>
-                <form action="${pageContext.request.contextPath}/search-bidorbuy-trades" onsubmit="return checkValidityAndShowSpinner()"
+                <form id="search-form" action="${pageContext.request.contextPath}/search-bidorbuy-trades" onsubmit="return checkValidityAndShowSpinner()"
                     method="GET">
 
                     <div>
@@ -76,6 +76,10 @@
                     <hr>
                     <button type="submit"> <i class="fas fa-search"></i> Search</button>
                 </form>
+
+                <div id="data-loader" class="data-loader">
+                    <i class="fas fa-spinner fa-spin"></i> searching... 
+                </div>
             </div>
         </div>
     </div>
