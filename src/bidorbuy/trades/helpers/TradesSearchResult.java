@@ -3,16 +3,16 @@ package bidorbuy.trades.helpers;
 public class TradesSearchResult {
 	
 	private TradeProduct[] trades;
-	private long totalResults;
+	private int totalResults;
 	private int pageNumber;
-	private long resultsPerPage;
+	private int resultsPerPage;
 	
 	
 	public TradesSearchResult() {
 		super();
 	}
 
-	public TradesSearchResult(TradeProduct[] trades, long totalResults, int pageNumber, long resultsPerPage) {
+	public TradesSearchResult(TradeProduct[] trades, int totalResults, int pageNumber, int resultsPerPage) {
 		super();
 		this.trades = trades;
 		this.totalResults = totalResults;
@@ -28,11 +28,11 @@ public class TradesSearchResult {
 		this.trades = trades;
 	}
 
-	public long getTotalResults() {
+	public int getTotalResults() {
 		return totalResults;
 	}
 
-	public void setTotalResults(long totalResults) {
+	public void setTotalResults(int totalResults) {
 		this.totalResults = totalResults;
 	}
 
@@ -44,11 +44,11 @@ public class TradesSearchResult {
 		this.pageNumber = pageNumber;
 	}
 
-	public long getResultsPerPage() {
+	public int getResultsPerPage() {
 		return resultsPerPage;
 	}
 
-	public void setResultsPerPage(long resultsPerPage) {
+	public void setResultsPerPage(int resultsPerPage) {
 		this.resultsPerPage = resultsPerPage;
 	}
 	

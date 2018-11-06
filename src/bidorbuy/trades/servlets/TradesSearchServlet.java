@@ -48,6 +48,8 @@ public class TradesSearchServlet extends HttpServlet {
 			throws ServletException, IOException {
 		TradesSearchResult searchResult = null;
 
+		HttpSession session = request.getSession();
+
 		// Prepare parameters for Bid or Buy web service
 		Enumeration<String> requestParameters = request.getParameterNames();
 
@@ -59,7 +61,18 @@ public class TradesSearchServlet extends HttpServlet {
 
 			while (hasMore) {
 				String paramName = requestParameters.nextElement();
-				webServiceRequestParams += paramName + "=" + request.getParameter(paramName);
+
+				if (paramName.equals("IncludedKeywords")) {
+
+					String[] paramsValues = request.getParameterValues(paramName);
+					webServiceRequestParams += paramName + "=" + String.join("%20", paramsValues);
+
+					session.setAttribute(paramName, webServiceRequestParams);
+				} else {
+
+					webServiceRequestParams += paramName + "=" + request.getParameter(paramName);
+					session.setAttribute(paramName, request.getParameter(paramName));
+				}
 
 				hasMore = requestParameters.hasMoreElements();
 
@@ -99,8 +112,8 @@ public class TradesSearchServlet extends HttpServlet {
 
 						TradeProduct[] tradeProducts = new TradeProduct[tradesArray.size()];
 						int pageNumber = jObject.getInt("pageNumber");
-						long totalResults = jObject.getJsonNumber("totalResults").longValue();
-						long resultsPerPage = jObject.getJsonNumber("resultsPerPage").longValue();
+						int totalResults = jObject.getInt("totalResults");
+						int resultsPerPage = jObject.getInt("resultsPerPage");
 
 						for (int x = 0; x < tradesArray.size(); x++) {
 							TradeProduct tradeProduct = new TradeProduct();
@@ -125,10 +138,10 @@ public class TradesSearchServlet extends HttpServlet {
 							DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
 
 							try {
-								
+
 								tradeProduct.setOpenTime(dFormat.parse(tradeJsonObj.getString("openTime")));
 								tradeProduct.setCloseTime(dFormat.parse(tradeJsonObj.getString("closeTime")));
-								
+
 							} catch (ParseException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -144,16 +157,16 @@ public class TradesSearchServlet extends HttpServlet {
 								images[z] = new TradeProductImage(imageUrl, thumbnailUrl);
 							}
 
+							tradeProduct.setImages(images);
 							tradeProducts[x] = tradeProduct;
+
+							System.out.println(" +++++> " + tradeProduct.getImages()[0].getImageUrl());
 
 						}
 
 						searchResult = new TradesSearchResult(tradeProducts, totalResults, pageNumber, resultsPerPage);
-						HttpSession session = request.getSession();
-
-						if (session != null) {
-							session.setAttribute("searchResult", searchResult);
-						}
+						
+						session.setAttribute("searchResult", searchResult);
 
 						System.out.println("Products => " + searchResult.getTrades().length);
 					}
@@ -162,7 +175,7 @@ public class TradesSearchServlet extends HttpServlet {
 
 			}
 
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			request.getRequestDispatcher("search-results.jsp").forward(request, response);
 		}
 	}
 
