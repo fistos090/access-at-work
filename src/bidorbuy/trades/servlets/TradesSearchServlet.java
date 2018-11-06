@@ -135,7 +135,7 @@ public class TradesSearchServlet extends HttpServlet {
 							tradeProduct.setHomeCategoryId(tradeJsonObj.getJsonNumber("homeCategoryId").longValue());
 							tradeProduct.setHotSelling(tradeJsonObj.getBoolean("hotSelling"));
 
-							DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+							DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd, HH:mm:ss", Locale.ENGLISH);
 
 							try {
 
