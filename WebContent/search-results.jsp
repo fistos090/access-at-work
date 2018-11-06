@@ -49,7 +49,7 @@
             <table class="results-table">
                 <tbody>
                     <tr class="row">
-                        <th colspan="2" class="col-md-12">
+                        <th colspan="2" class="col-md-12" style="padding: 0px">
                             Search results: Trade products details
                             <ul class="results-pager">
                                 <li><a href="${loadPreviousPgParams}">Previous</a></li>
