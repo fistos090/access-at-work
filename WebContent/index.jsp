@@ -29,6 +29,7 @@
                     <div>
                         <label for="resultsPerPage">Number of results per page:</label>
                         <input class="text-input" style="margin-bottom: 5px;" type="text" id="resultsPerPage" name="resultsPerPage" placeholder=".e.g 30">
+                        <div id="results-per-page-vm"></div>
                     </div>
 
                     <div>
@@ -51,6 +52,7 @@
                                     value="REFURBISHED"><label class="checkbox-input-label" for="">Refurbished</label>
                             </div>
                         </div>
+                        <div id="included-keywords-vm"></div>
                     </div>
 
                     <div>
@@ -61,6 +63,7 @@
                             <option value="FIXED_PRICE">Buy nows</option>
                             <option value="CLASSIFIED_CONTACT">Classifieds</option>
                         </select>
+                        <div id="trade-type-vm"></div>
                     </div>
 
                     <div>

@@ -5,27 +5,23 @@ function checkValidityAndShowSpinner(event) {
     let isFormValid = true;
 
     const resultsPerPage = document.getElementById("resultsPerPage").value;
+
+    if (resultsPerPage !== '' && resultsPerPage) {
+        if (resultsPerPage.includes('.')) {
+            insertValidationMessage('results-per-page-vm', 'Only integer numbers are allowed');
+            isFormValid = false;
+        }
+        if (isNaN(resultsPerPage)) {
+            insertValidationMessage('results-per-page-vm', 'Only numbers are allowed');
+            isFormValid = false;
+        }
+    }
+
     const tradeType = document.getElementById("TradeType").value;
-    const orderBy = document.getElementById("OrderBy").value;
-
-
-    if (isNaN(resultsPerPage)) {
-        insertValidationMessage(id,'Only numbers are allowed');
+    if (tradeType === '' || !tradeType) {
+        insertValidationMessage('trade-type-vm', 'Please select trade type');
         isFormValid = false;
     }
-    else {
-        if (resultsPerPage !== '') {
-            if (resultsPerPage.includes('.')) {
-                insertValidationMessage(id,'Only integer numbers are allowed');
-            }
-        }
-
-
-    }
-
-
-
-    console.log("resultsPerPageresultsPerPage", resultsPerPage)
 
     if (isFormValid) {
         document.getElementById("data-loader").style.display = 'block';
@@ -35,8 +31,10 @@ function checkValidityAndShowSpinner(event) {
     return isFormValid;
 }
 
-function insertValidationMessage( messageAreaID, message ){
+function insertValidationMessage(messageAreaID, message) {
     if (messageAreaID) {
-        document.getElementById(messageAreaID).innerHTML = message;
+        const element = document.getElementById(messageAreaID);
+        element.innerHTML = message;
+        element.style.color = 'indianred';
     }
 }
