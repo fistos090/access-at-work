@@ -59,11 +59,11 @@
                     </tr>
                     <c:forEach items="${searchResult.getTrades()}" var="tradeProd">
                         <tr class="row">
-                            <td class="col-md-3">
+                            <td class="col-md-2">
                                 <!-- Use thumbnail for alternative image -->
                                 <img height="120" width="125" src="${tradeProd.getImages()[0].getImageUrl()}" alt="${tradeProd.images[0].getThumbnailUrl()}">
                             </td>
-                            <td class="col-md-9">
+                            <td class="col-md-10">
                                 <c:out value="${tradeProd.getTitle()}" />
                             </td>
                         </tr>

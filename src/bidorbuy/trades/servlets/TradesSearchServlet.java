@@ -128,7 +128,8 @@ public class TradesSearchServlet extends HttpServlet {
 							tradeProduct.setCategoryBreadCrumb(tradeJsonObj.getString("categoryBreadCrumb"));
 
 							tradeProduct.setAmount(tradeJsonObj.getJsonNumber("amount").doubleValue());
-//							tradeProduct.setRecommendedRetailPrice(tradeJsonObj.getJsonNumber("recommendedRetailPrice").doubleValue());
+							// TODO: replace getInt with get double value
+							tradeProduct.setRecommendedRetailPrice(tradeJsonObj.getInt("recommendedRetailPrice"));
 
 							tradeProduct.setUserId(tradeJsonObj.getJsonNumber("userId").longValue());
 							tradeProduct.setTradeId(tradeJsonObj.getJsonNumber("tradeId").longValue());
@@ -160,15 +161,11 @@ public class TradesSearchServlet extends HttpServlet {
 							tradeProduct.setImages(images);
 							tradeProducts[x] = tradeProduct;
 
-							System.out.println(" +++++> " + tradeProduct.getImages()[0].getImageUrl());
-
 						}
 
 						searchResult = new TradesSearchResult(tradeProducts, totalResults, pageNumber, resultsPerPage);
 						
 						session.setAttribute("searchResult", searchResult);
-
-						System.out.println("Products => " + searchResult.getTrades().length);
 					}
 
 				}

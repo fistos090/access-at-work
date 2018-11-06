@@ -105,10 +105,6 @@ form{
     border-left: solid 0.2px #888;
 }
 
-.results-table tr td:first-child{
-    padding: 0px 45px;
-}
-
 .results-table tr td:last-child{
     border-right: solid 0.2px #888;
 }
