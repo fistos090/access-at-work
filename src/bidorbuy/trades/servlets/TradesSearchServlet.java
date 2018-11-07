@@ -61,19 +61,27 @@ public class TradesSearchServlet extends HttpServlet {
 
 			while (hasMore) {
 				String paramName = requestParameters.nextElement();
+				String paramValue = "";
 
 				if (paramName.equals("IncludedKeywords")) {
 
 					String[] paramsValues = request.getParameterValues(paramName);
-					webServiceRequestParams += paramName + "=" + String.join("%20", paramsValues);
-
-					session.setAttribute(paramName, webServiceRequestParams);
+					
+					if ( paramsValues.length == 1) {
+						if (paramsValues[0].contains(" ")) {
+							paramsValues = paramsValues[0].split(" ");
+						}
+					}
+					
+					paramValue =  String.join("%20", paramsValues);
+					
 				} else {
-
-					webServiceRequestParams += paramName + "=" + request.getParameter(paramName);
-					session.setAttribute(paramName, request.getParameter(paramName));
+					paramValue = request.getParameter(paramName);
 				}
-
+				
+				session.setAttribute(paramName, paramValue);
+				webServiceRequestParams += paramName + "=" + paramValue;
+				
 				hasMore = requestParameters.hasMoreElements();
 
 				if (hasMore) {
@@ -81,8 +89,6 @@ public class TradesSearchServlet extends HttpServlet {
 				}
 
 			}
-
-			System.out.println("webServiceRequestParams => " + webServiceRequestParams);
 
 			// Open connection to Bid or Buy web server
 
@@ -128,43 +134,35 @@ public class TradesSearchServlet extends HttpServlet {
 							tradeProduct.setCategoryBreadCrumb(tradeJsonObj.getString("categoryBreadCrumb"));
 
 							tradeProduct.setAmount(tradeJsonObj.getJsonNumber("amount").doubleValue());
-							// TODO: replace getInt with get double value
-							tradeProduct.setRecommendedRetailPrice(tradeJsonObj.getInt("recommendedRetailPrice"));
 
 							tradeProduct.setUserId(tradeJsonObj.getJsonNumber("userId").longValue());
 							tradeProduct.setTradeId(tradeJsonObj.getJsonNumber("tradeId").longValue());
 							tradeProduct.setHomeCategoryId(tradeJsonObj.getJsonNumber("homeCategoryId").longValue());
 							tradeProduct.setHotSelling(tradeJsonObj.getBoolean("hotSelling"));
-
-							DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd, HH:mm:ss", Locale.ENGLISH);
-
-							try {
-
-								tradeProduct.setOpenTime(dFormat.parse(tradeJsonObj.getString("openTime")));
-								tradeProduct.setCloseTime(dFormat.parse(tradeJsonObj.getString("closeTime")));
-
-							} catch (ParseException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
+							tradeProduct.setOpenTime(tradeJsonObj.getString("openTime"));
+							tradeProduct.setCloseTime(tradeJsonObj.getString("closeTime"));
 
 							JsonArray tradeJsonObjImages = tradeJsonObj.getJsonArray("images");
-							TradeProductImage[] images = new TradeProductImage[tradeJsonObjImages.size()];
 
-							for (int z = 0; z < tradeJsonObjImages.size(); z++) {
-								String imageUrl = tradeJsonObjImages.getJsonObject(z).getString("image");
-								String thumbnailUrl = tradeJsonObjImages.getJsonObject(z).getString("thumbnail");
+							if (tradeJsonObjImages != null) {
+								TradeProductImage[] images = new TradeProductImage[tradeJsonObjImages.size()];
 
-								images[z] = new TradeProductImage(imageUrl, thumbnailUrl);
+								for (int z = 0; z < tradeJsonObjImages.size(); z++) {
+									String imageUrl = tradeJsonObjImages.getJsonObject(z).getString("image");
+									String thumbnailUrl = tradeJsonObjImages.getJsonObject(z).getString("thumbnail");
+
+									images[z] = new TradeProductImage(imageUrl, thumbnailUrl);
+								}
+
+								tradeProduct.setImages(images);
 							}
 
-							tradeProduct.setImages(images);
 							tradeProducts[x] = tradeProduct;
 
 						}
 
 						searchResult = new TradesSearchResult(tradeProducts, totalResults, pageNumber, resultsPerPage);
-						
+
 						session.setAttribute("searchResult", searchResult);
 					}
 
@@ -172,7 +170,9 @@ public class TradesSearchServlet extends HttpServlet {
 
 			}
 
-			request.getRequestDispatcher("search-results.jsp").forward(request, response);
+			response.sendRedirect("search-results.jsp");
+			
+//			request.getRequestDispatcher("search-results.jsp").forward(request, response);
 		}
 	}
 

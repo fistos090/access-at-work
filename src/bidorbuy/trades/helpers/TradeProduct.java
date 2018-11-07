@@ -1,7 +1,5 @@
 package bidorbuy.trades.helpers;
 
-import java.util.Date;
-
 public class TradeProduct {
 	
 	private TradeProductImage[] images;
@@ -10,13 +8,12 @@ public class TradeProduct {
 	private String type;
 	private long userId;
 	private boolean hotSelling;
-	private double recommendedRetailPrice;
 	private String categoryBreadCrumb;
 	private String userAlias;
-	private Date closeTime;
+	private String closeTime;
 	private long homeCategoryId;
 	private String location;
-	private Date openTime;
+	private String openTime;
 	private long tradeId;
 	private String status;
 	
@@ -56,12 +53,7 @@ public class TradeProduct {
 	public void setHotSelling(boolean hotSelling) {
 		this.hotSelling = hotSelling;
 	}
-	public double getRecommendedRetailPrice() {
-		return recommendedRetailPrice;
-	}
-	public void setRecommendedRetailPrice(double recommendedRetailPrice) {
-		this.recommendedRetailPrice = recommendedRetailPrice;
-	}
+
 	public String getCategoryBreadCrumb() {
 		return categoryBreadCrumb;
 	}
@@ -74,10 +66,10 @@ public class TradeProduct {
 	public void setUserAlias(String userAlias) {
 		this.userAlias = userAlias;
 	}
-	public Date getCloseTime() {
+	public String getCloseTime() {
 		return closeTime;
 	}
-	public void setCloseTime(Date closeTime) {
+	public void setCloseTime(String closeTime) {
 		this.closeTime = closeTime;
 	}
 	public long getHomeCategoryId() {
@@ -92,10 +84,10 @@ public class TradeProduct {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public Date getOpenTime() {
+	public String getOpenTime() {
 		return openTime;
 	}
-	public void setOpenTime(Date openTime) {
+	public void setOpenTime(String openTime) {
 		this.openTime = openTime;
 	}
 	public long getTradeId() {
