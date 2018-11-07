@@ -3,11 +3,7 @@ package bidorbuy.trades.servlets;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Enumeration;
-import java.util.Locale;
 
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -171,8 +167,6 @@ public class TradesSearchServlet extends HttpServlet {
 			}
 
 			response.sendRedirect("search-results.jsp");
-			
-//			request.getRequestDispatcher("search-results.jsp").forward(request, response);
 		}
 	}
 
