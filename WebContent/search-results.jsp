@@ -7,13 +7,13 @@
 
 <head>
     <meta charset="ISO-8859-1">
-    <title>Insert title here</title>
+    <title>bidorbuy Trades Search Engine:Results</title>
     <link rel="stylesheet" type="text/css" href="css/bidorbuy-stylesheet.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
 
     <%
-        TradesSearchResult searchResult = (TradesSearchResult) session.getAttribute("searchResult");
+        /* TradesSearchResult searchResult = (TradesSearchResult) session.getAttribute("searchResult");
         
         String resultsPerPage = (String) session.getAttribute("resultsPerPage");
         String IncludedKeywords = (String) session.getAttribute("IncludedKeywords");
@@ -26,14 +26,13 @@
 
         String loadPreviousPgParams = "search-bidorbuy-trades/?resultsPerPage="+resultsPerPage+"&pageNumber="+(searchResult.getPageNumber()-1)+
                                       "&IncludedKeywords="+IncludedKeywords+"&TradeType="+TradeType+"&OrderBy="+OrderBy;
-                                      System.out.println("loadNextPgParams "+loadNextPgParams);
+                                      System.out.println("loadNextPgParams "+loadNextPgParams); */
      %>
 </head>
 
 <body>
-    ${TradeType}
-    <div>
-        <div class="top-nav">
+
+    <!-- <div class="top-nav">
             <span>
                 Page number: [ ${searchResult.getPageNumber()} of ${searchResult.getTotalResults() >
                 searchResult.getResultsPerPage() ? (searchResult.getTotalResults() / searchResult.getResultsPerPage())
@@ -60,7 +59,6 @@
                     <c:forEach items="${searchResult.getTrades()}" var="tradeProd">
                         <tr class="row">
                             <td class="col-md-2">
-                                <!-- Use thumbnail for alternative image -->
                                 <img height="120" width="125" src="${tradeProd.getImages()[0].getImageUrl()}" alt="${tradeProd.images[0].getThumbnailUrl()}">
                             </td>
                             <td class="col-md-10">
@@ -70,8 +68,45 @@
                     </c:forEach>
                 </tbody>
             </table>
-        </div>
+        </div> -->
+
+    <div class="top-nav">
+        <a href="index.jsp" class="back-link">
+            <i class="fas fa-long-arrow-alt-left"></i> Back to search
+        </a>
     </div>
+    <div class="container">
+        <table class="results-table">
+            <tr class="row results-table-head">
+                <th colspan="2">bidorbuy trades details: Search results</th>
+            </tr>
+            <tr class="row results-table-body">
+                <td class="col-md-2">
+                    <img height="140" width="160" src="home-back.png" />
+                    <!-- <img height="120" width="125" src="${tradeProd.getImages()[0].getImageUrl()}" alt="${tradeProd.images[0].getThumbnailUrl()}"> -->
+                </td>
+                <td class="col-md-10">
+                    <div class="row">
+                        <label for="">Product title</label>
+                        Simba chips
+                    </div>
+                    <div class="row">
+                        <span class="col-md-6">
+                            <label for="">Amount</label>
+                            R 20.00
+                        </span>
+                        <span class="col-md-6">
+                            <label for="">recommended Retail Price</label>
+                            R 21.50
+                        </span>
+                    </div>
+
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
 </body>
 <script src="js/bidorbuy-jsscript.js"></script>
 <script src="js/bootstrap.min.js"></script>

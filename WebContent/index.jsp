@@ -5,22 +5,18 @@
 
 <head>
     <meta charset="ISO-8859-1">
-    <title>BidorBuy Trades Search Engine</title>
+    <title>bidorbuy Trades Search Engine:Search</title>
     <link rel="stylesheet" type="text/css" href="css/bidorbuy-stylesheet.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
-        crossorigin="anonymous">
-    <%
-	
-	%>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" >
 
 </head>
 
 <body>
 
     <div class="container-fluid">
-        <div class="row search-form-section">
-            <div class="sidebar">
+        <div class="row">
+            <div class="search-form-section">
                 <h5>Search bidorbuy trades</h5>
                 <hr>
                 <form id="search-form" action="${pageContext.request.contextPath}/search-bidorbuy-trades" onsubmit="return checkValidityAndShowSpinner()"
@@ -28,12 +24,19 @@
 
                     <div>
                         <label for="resultsPerPage">Number of results per page:</label>
-                        <input class="text-input" style="margin-bottom: 5px;" type="text" id="resultsPerPage" name="resultsPerPage" placeholder=".e.g 30">
-                        <div id="results-per-page-vm"></div>
+                        <input 
+                            class="text-input" 
+                            style="margin-bottom: 5px;" 
+                            type="text" 
+                            id="resultsPerPage" 
+                            name="resultsPerPage" 
+                            placeholder="e.g. 30"
+                            oninput="removeValidationMessage('results-per-page-vm')">
+                        <div id="results-per-page-vm" style="display: none"></div>
                     </div>
 
                     <div>
-                        <input hidden class="text-input" style="margin-bottom: 5px;" type="text" id="pageNumber" name="pageNumber" value="1">
+                        <input hidden="true" class="text-input" style="margin-bottom: 5px;" type="text" id="pageNumber" name="pageNumber" value="1">
                     </div>
 
                     <div>
@@ -52,18 +55,17 @@
                                     value="REFURBISHED"><label class="checkbox-input-label" for="">Refurbished</label>
                             </div>
                         </div>
-                        <div id="included-keywords-vm"></div>
                     </div>
 
                     <div>
                         <label for="TradeType">Trade type:</label>
-                        <select name="TradeType" id="TradeType">
+                        <select name="TradeType" id="TradeType" onchange="removeValidationMessage('trade-type-vm')">
                             <option value="">-- Select trade type --</option>
                             <option value="ENGLISH_AUCTION">Auctions</option>
                             <option value="FIXED_PRICE">Buy nows</option>
                             <option value="CLASSIFIED_CONTACT">Classifieds</option>
                         </select>
-                        <div id="trade-type-vm"></div>
+                        <div id="trade-type-vm" style="display: none"></div>
                     </div>
 
                     <div>

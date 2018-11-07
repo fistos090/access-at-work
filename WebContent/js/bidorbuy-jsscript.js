@@ -1,25 +1,25 @@
 
 
-function checkValidityAndShowSpinner(event) {
+function checkValidityAndShowSpinner() {
 
     let isFormValid = true;
 
-    const resultsPerPage = document.getElementById("resultsPerPage").value;
+    const resultsPerPage = document.getElementById('resultsPerPage').value;
 
     if (resultsPerPage !== '' && resultsPerPage) {
-        if (resultsPerPage.includes('.')) {
-            insertValidationMessage('results-per-page-vm', 'Only integer numbers are allowed');
+        if (isNaN(resultsPerPage)) {
+            insertValidationMessage('results-per-page-vm', '  Only numbers are allowed');
             isFormValid = false;
         }
-        if (isNaN(resultsPerPage)) {
-            insertValidationMessage('results-per-page-vm', 'Only numbers are allowed');
+        if (resultsPerPage.includes('.')) {
+            insertValidationMessage('results-per-page-vm', '  Only integer numbers are allowed');
             isFormValid = false;
         }
     }
 
-    const tradeType = document.getElementById("TradeType").value;
+    const tradeType = document.getElementById('TradeType').value;
     if (tradeType === '' || !tradeType) {
-        insertValidationMessage('trade-type-vm', 'Please select trade type');
+        insertValidationMessage('trade-type-vm', '  Please select trade type');
         isFormValid = false;
     }
 
@@ -32,9 +32,22 @@ function checkValidityAndShowSpinner(event) {
 }
 
 function insertValidationMessage(messageAreaID, message) {
+
     if (messageAreaID) {
-        const element = document.getElementById(messageAreaID);
-        element.innerHTML = message;
-        element.style.color = 'indianred';
+        const messageAreaElement = document.getElementById(messageAreaID);
+        messageAreaElement.innerHTML = message;
+        messageAreaElement.style.display = 'block';
+        messageAreaElement.style.color = 'rgb(234, 60, 60)';
     }
+
+}
+
+function removeValidationMessage(messageAreaID) {
+
+    if (messageAreaID) {
+        const messageAreaElement = document.getElementById(messageAreaID);
+        messageAreaElement.innerHTML = '';
+        messageAreaElement.style.display = 'none';
+    }
+
 }
